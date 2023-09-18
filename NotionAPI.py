@@ -109,4 +109,7 @@ class NotionAPI:
 if __name__ == '__main__':
     notion_api = NotionAPI(NOTION_API_TOKEN, NOTION_DATABASE_ID_DASHBOARD, NOTION_DATABASE_ID_REF)
     df_all = notion_api.get_everything(10)
-    df_all.to_csv('all_activity.csv')
+    try:
+        df_all.to_csv('all_activity.csv')
+    except PermissionError:
+        df_all.to_csv('all_activity_temp.csv')
